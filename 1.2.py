@@ -3,7 +3,8 @@ objects = [1, 2, 1, 5, True, False, True, 'false', [], [1, 2], [1, 2]]
 print(len(set(map(id, objects))))
 #---------------------------------
 
-fin = [];
+fin = []
+
 fin.append(objects[0])
 print(objects[0], 'добавлен', fin)
 
