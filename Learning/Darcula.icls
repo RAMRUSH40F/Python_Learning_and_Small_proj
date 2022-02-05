@@ -1,0 +1,114 @@
+<scheme name="Darcula" version="142" parent_scheme="Darcula">
+  <option name="FONT_SCALE" value="1.0" />
+  <metaInfo>
+    <property name="created">2022-02-05T23:49:29</property>
+    <property name="ide">PyCharmCore</property>
+    <property name="ideVersion">2021.3.0.0</property>
+    <property name="modified">2022-02-05T23:49:34</property>
+    <property name="originalScheme">_@user_Darcula</property>
+  </metaInfo>
+  <option name="LINE_SPACING" value="1.0" />
+  <option name="EDITOR_FONT_SIZE" value="21" />
+  <option name="EDITOR_FONT_NAME" value="Consolas" />
+  <option name="EDITOR_LIGATURES" value="true" />
+  <option name="CONSOLE_FONT_NAME" value="Consolas" />
+  <option name="CONSOLE_LIGATURES" value="true" />
+  <colors>
+    <option name="FILESTATUS_ADDED" value="c3e887" />
+    <option name="FILESTATUS_DELETED" value="f77669" />
+    <option name="FILESTATUS_HIJACKED" value="ffcb6b" />
+    <option name="FILESTATUS_IDEA_SVN_FILESTATUS_EXTERNAL" value="72a038" />
+    <option name="FILESTATUS_IDEA_SVN_FILESTATUS_OBSTRUCTED" value="727238" />
+    <option name="FILESTATUS_IDEA_SVN_REPLACED" value="c3e887" />
+    <option name="FILESTATUS_MODIFIED" value="80cbc4" />
+    <option name="FILESTATUS_NOT_CHANGED_IMMEDIATE" value="80cbc4" />
+    <option name="FILESTATUS_NOT_CHANGED_RECURSIVE" value="80cbc4" />
+    <option name="FILESTATUS_OBSOLETE" value="ffcb6b" />
+    <option name="FILESTATUS_SUPPRESSED" value="546e7a" />
+    <option name="FILESTATUS_SWITCHED" value="f77669" />
+    <option name="FILESTATUS_UNKNOWN" value="f77669" />
+  </colors>
+  <attributes>
+    <option name="LOG_ERROR_OUTPUT">
+      <value>
+        <option name="FOREGROUND" value="e33644" />
+      </value>
+    </option>
+    <option name="LOG_EXPIRED_ENTRY">
+      <value>
+        <option name="FOREGROUND" value="e33644" />
+      </value>
+    </option>
+    <option name="PY.BUILTIN_NAME">
+      <value />
+    </option>
+    <option name="PY.CLASS_DEFINITION">
+      <value>
+        <option name="FOREGROUND" value="dba137" />
+      </value>
+    </option>
+    <option name="PY.COMMA">
+      <value>
+        <option name="FOREGROUND" value="9534c6" />
+      </value>
+    </option>
+    <option name="PY.DECORATOR">
+      <value>
+        <option name="FOREGROUND" value="bbb529" />
+      </value>
+    </option>
+    <option name="PY.DOC_COMMENT">
+      <value>
+        <option name="FOREGROUND" value="405221" />
+        <option name="FONT_TYPE" value="2" />
+      </value>
+    </option>
+    <option name="PY.DOT">
+      <value>
+        <option name="FOREGROUND" value="b339dc" />
+      </value>
+    </option>
+    <option name="PY.KEYWORD">
+      <value>
+        <option name="FOREGROUND" value="9834de" />
+        <option name="FONT_TYPE" value="1" />
+        <option name="EFFECT_TYPE" value="4" />
+      </value>
+    </option>
+    <option name="PY.LINE_COMMENT">
+      <value>
+        <option name="FOREGROUND" value="405221" />
+      </value>
+    </option>
+    <option name="PY.NUMBER">
+      <value>
+        <option name="FOREGROUND" value="71c3fa" />
+      </value>
+    </option>
+    <option name="PY.OPERATION_SIGN">
+      <value>
+        <option name="FOREGROUND" value="a52cde" />
+      </value>
+    </option>
+    <option name="PY.PARAMETER">
+      <value>
+        <option name="FOREGROUND" value="dea778" />
+      </value>
+    </option>
+    <option name="PY.SELF_PARAMETER">
+      <value>
+        <option name="FOREGROUND" value="ccf36b" />
+      </value>
+    </option>
+    <option name="PY.STRING.U">
+      <value>
+        <option name="FOREGROUND" value="49792d" />
+      </value>
+    </option>
+    <option name="PY.VALID_STRING_ESCAPE">
+      <value>
+        <option name="FOREGROUND" value="e5e1de" />
+      </value>
+    </option>
+  </attributes>
+</scheme>
