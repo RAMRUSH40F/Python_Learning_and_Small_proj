@@ -1,39 +1,42 @@
 import telebot
 from telebot import types
-from config import token, sayhi
+from config import token, sayhi, family_chat_id , admin_chat_id
 from weather_api import get_weather
 from SQLighter import SQLighter
 import csv
 import pickle
 import re
+import schedule
+import time
+import threading
 
 
 bot = telebot.TeleBot(token)
-# hideBoard = types.ReplyKeyboardRemove()
 
 
 def message_filter(message):
 
     #  ГЛАВНОЕ МЕНЮ
-    if message.text in ['меню', 'Меню', '@renatakamilabot', 'Старт', 'старт', 'Начать','начать', 'Привет', 'привет', 'Назад']:
+    if message.text in ['меню', 'Меню', '@renatakamilabot', 'Старт', 'старт', 'Начать', 'начать', 'Привет', 'привет', 'Назад']:
+        # bot.send_message(message.chat.id,message.chat.id)
         main_menue(message)
 
     #  Послать погоду
     elif message.text in ['Погода',"погода"]: send_weather(message.chat.id)
 
     #  Раздел списка продуктов
-    elif message.text in ['Список Продуктов', 'Посмотреть список продуктов', 'Добавить продукты']:
+    elif message.text in ['Список Продуктов', 'Посмотреть список продуктов', 'Добавить продукты','Очистить']:
         if message.text == 'Список Продуктов': shopping_menue(message)
         elif message.text == 'Посмотреть список продуктов': show_shopping_list(message)
         elif message.text == 'Добавить продукты': add_to_shop_list(message)
-
+        elif message.text == 'Очистить': delete_shoplist(message.chat.id)
     #  Раздел уборки
     elif message.text in ['Уборка',"уборка",'Заявить об уборке','Посмотреть баллы']:
         if message.text in ['Уборка',"уборка"]: cleaning_menu(message)
         elif message.text == 'Заявить об уборке': cleaning_done_menu(message)
         elif message.text == 'Посмотреть баллы': get_scores(message)
 
-    #  Модерируем плохие слова ( НЕ ГОТОВО).
+    #  Модерируем плохие слова .
     elif censorship(message.text): bot.delete_message(message.chat.id, message.id)
 
 
@@ -78,10 +81,12 @@ def get_shoplist():
         temp_list = pickle.load(file)
         return temp_list
 
-# def delete_shoplist():
-#     randomrandom22 = []
-#     with open('shoplistfile.bin', 'wb') as file:
-#         pickle.dump(randomrandom22, file)
+def delete_shoplist(chat_id):
+    if chat_id == admin_chat_id:
+        print('p')
+        randomrandom22 = ['Кефир']
+        with open('shoplistfile.bin', 'wb') as file:
+            pickle.dump(randomrandom22, file)
 
 def write_to_shoplist_from_message(message):
     text = message.text
@@ -103,7 +108,7 @@ def send_weather(chatid):
         bot.send_photo(chatid, weather_icon)
 
 def censorship(text):
-    return text in ['плохой','какашка']
+    return text in ['плохой','какашка','шындырск']
 
 def cleaning_menu(message):
     menu = types.ReplyKeyboardMarkup(row_width=1, resize_keyboard=True)
@@ -137,10 +142,35 @@ def get_scores(message):
 
     db.close()
 
+def send_poll(message):
+    global poll_info
+    poll_info = bot.send_poll(int(family_chat_id), 'Убрал ли Рамиль комнату Кухня?',
+                              [ 'Да (+15б)', 'Нет(-5б)', '50/50(8б)' ], is_anonymous= True, type='regular',
+                              disable_notification=True)
+
+    time = str(poll_info.json[ 'date' ])
+    total_votes = str(poll_info.json[ 'poll' ][ 'total_voter_count' ])
+    opt_yes = str(poll_info.json[ 'poll' ][ 'options' ][ 0 ][ 'voter_count' ])
+    opt_no = str(poll_info.json[ 'poll' ][ 'options' ][ 1 ][ 'voter_count' ])
+    bot.send_message(message.chat.id, opt_yes)
+
+#  Присылаем утром погоду и пожелания.
+def good_morning():
+    bot.send_message(family_chat_id,'Доброе утро! Cегодня очередной прекрасный день')
+    send_weather(family_chat_id)
+#  Запускаем бесконечный цикл на другом ядре
+def morning_checker():
+    schedule.every().day.at("08:00").do(good_morning)
+    while True:
+        schedule.run_pending()
+        time.sleep(5)
+
+
 @bot.message_handler(commands=['start'])
 def hello(message):
     # sayhi - variable for starting message
     bot.send_message(message.chat.id, sayhi)
+    bot.delete_message(message.chat.id, message.id)
 
 
 @bot.message_handler(content_types=['text'])
@@ -148,4 +178,7 @@ def main(message):
     message_filter(message)
 
 if __name__ == '__main__':
+    thread1 = threading.Thread(target = morning_checker)
+    thread1.start()
     bot.infinity_polling()
+

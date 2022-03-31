@@ -1,5 +1,7 @@
 token = '5232909795:AAGd7ddL0QP88PgoGUIvcCal6WnZTGWk6OU'
 sayhi = 'Рад видеть и служить вам. Напишите либо старт либо начать либо привет, чтобы увидеть,что я могу'
+family_chat_id = -1001601086563
+admin_chat_id = 397596258
 import pickle
 #
 # randomrandom22 = ['Помидоры', 'Огурцы']
