@@ -1,37 +1,35 @@
 import sqlite3
+from datetime import datetime
+
 
 class SQLighter:
 
-    def __init__(self, database,message):
+    def __init__(self, database):
         self.connection = sqlite3.connect(database)
         self.cursor = self.connection.cursor()
-        self.message = message
-
-    # def get_scores(self):
-    #     """ Получаем все строки """
-    #     with self.connection:
-    #         return self.cursor.execute('SELECT * FROM scores').fetchall()
 
     #  [('397596258', 'Рамиль', 0, '.', '.'), ('1008715504', 'Эльмира', 0, '.', '.'), ('1914578771', 'Камила', 0, '.', '.')]
     def get_all_scores(self):
         """ Получаем все строки """
         with self.connection:
-            base = self.cursor.execute('SELECT name,score,place,time FROM scores').fetchall()
+            base = self.cursor.execute('SELECT name,score,location,time FROM scores').fetchall()
             res = []
             for row in base :
-                res.append(f'{row[0]} - {row[1]} балл(-ов). В последний раз {row[2]} он убирал {row[3]}')
+                res.append(f'{row[0]} - {row[1]} балл(-ов). В последний раз он(а) убирал(а) {row[3]} {row[2]} ')
             return res
 
-    # db.commit
+    def up_score(self, chat_id, points, place):
 
-    # def get_your_score(self):
-    #     """ Получаем одну строку с номером rownum """
-    #     with self.connection:
-    #         return self.cursor.execute('SELECT * FROM scores WHERE id = ?', self.message.chat.id).fetchall()
+
+        current_date = str(datetime.now().date())[-5:-3]+'.'+str(datetime.now().date())[-2:]
+
+        with self.connection:
+            base = self.cursor.execute(f'SELECT chat_id, score FROM scores WHERE chat_id = {chat_id}').fetchall()
+            points = base[0][1] + points
+
+            base = self.cursor.execute('UPDATE scores SET location=?, time=?, score=? WHERE chat_id =?',(place, current_date, points, chat_id))
 
 
     def close(self):
         """ Закрываем текущее соединение с БД """
         self.connection.close()
-
-

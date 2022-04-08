@@ -1,6 +1,6 @@
 import telebot
 from telebot import types
-from config import token, sayhi, family_chat_id , admin_chat_id
+from config import token, sayhi, family_chat_id, admin_chat_id, poll_min_number
 from weather_api import get_weather
 from SQLighter import SQLighter
 import csv
@@ -9,7 +9,7 @@ import re
 import schedule
 import time
 import threading
-
+import datetime
 
 bot = telebot.TeleBot(token)
 
@@ -19,6 +19,7 @@ def message_filter(message):
     #  ГЛАВНОЕ МЕНЮ
     if message.text in ['меню', 'Меню', '@renatakamilabot', 'Старт', 'старт', 'Начать', 'начать', 'Привет', 'привет', 'Назад']:
         # bot.send_message(message.chat.id,message.chat.id)
+        # bot.send_message(message.chat.id, message.json['from']['first_name'])
         main_menue(message)
 
     #  Послать погоду
@@ -31,24 +32,32 @@ def message_filter(message):
         elif message.text == 'Добавить продукты': add_to_shop_list(message)
         elif message.text == 'Очистить': delete_shoplist(message.chat.id)
     #  Раздел уборки
-    elif message.text in ['Уборка',"уборка",'Заявить об уборке','Посмотреть баллы']:
+    elif message.text in ['Уборка',"уборка",'Заявить об уборке','Посмотреть баллы','Туалет','Кухня','Ванная','Коридор','Посуда']:
         if message.text in ['Уборка',"уборка"]: cleaning_menu(message)
         elif message.text == 'Заявить об уборке': cleaning_done_menu(message)
         elif message.text == 'Посмотреть баллы': get_scores(message)
-
+        elif message.text in ['Туалет','Кухня','Ванная','Коридор','Посуда']: cleaning_committed(message)
     #  Модерируем плохие слова .
     elif censorship(message.text): bot.delete_message(message.chat.id, message.id)
 
 
 # open a main menue
 def main_menue(message):
-    menu = types.ReplyKeyboardMarkup(row_width=1, resize_keyboard=True)
-    btn_weather = types.KeyboardButton(text='Погода')
-    btn_store_list = types.KeyboardButton(text='Список Продуктов')
-    btn_cleaning = types.KeyboardButton(text='Уборка')
+    if not message.chat.type == 'supergroup':
+        menu = types.ReplyKeyboardMarkup(row_width=1, resize_keyboard=True)
+        btn_weather = types.KeyboardButton(text='Погода')
+        btn_store_list = types.KeyboardButton(text='Список Продуктов')
+        btn_cleaning = types.KeyboardButton(text='Уборка')
 
-    menu.add(btn_store_list, btn_cleaning, btn_weather)
-    bot.send_message(message.chat.id, 'Вот список моих функций на сегодня. Пользуйся :) ', reply_markup=menu)
+        menu.add(btn_store_list, btn_cleaning, btn_weather)
+        bot.send_message(message.chat.id, 'Вот список моих функций на сегодня. Пользуйся :) ', reply_markup=menu)
+
+    else:
+        menu = types.ReplyKeyboardMarkup(row_width=1, resize_keyboard=True)
+        btn_weather = types.KeyboardButton(text='Погода')
+
+        menu.add(btn_weather)
+        bot.send_message(message.chat.id, 'Вот список моих функций на сегодня. Пользуйся :)', reply_markup=menu)
 
 
 #  open a shopping menue
@@ -84,9 +93,9 @@ def get_shoplist():
 def delete_shoplist(chat_id):
     if chat_id == admin_chat_id:
         print('p')
-        randomrandom22 = ['Кефир']
+        starting_list = ['Кефир']
         with open('shoplistfile.bin', 'wb') as file:
-            pickle.dump(randomrandom22, file)
+            pickle.dump(starting_list, file)
 
 def write_to_shoplist_from_message(message):
     text = message.text
@@ -97,7 +106,7 @@ def write_to_shoplist_from_message(message):
     temp_list = get_shoplist() + text
     temp_list = set(temp_list)
     temp_list = list(temp_list)
-    # print(temp_list)
+
     with open('shoplistfile.bin', 'wb') as file:
         pickle.dump(temp_list, file)
 
@@ -116,9 +125,8 @@ def cleaning_menu(message):
     btn_declare = types.KeyboardButton(text='Заявить об уборке')
     btn_back = types.KeyboardButton(text='Назад')
 
-    menu.add(btn_declare, btn_scores,btn_back)
+    menu.add(btn_declare, btn_scores, btn_back)
     sent = bot.send_message(message.chat.id, 'Выбери нужный пункт.', reply_markup=menu)
-    # bot.delete_message(sent.chat.id, sent.id)
 
 def cleaning_done_menu(message):
     menu = types.ReplyKeyboardMarkup(row_width=2, resize_keyboard=True)
@@ -130,40 +138,118 @@ def cleaning_done_menu(message):
     btn_back = types.KeyboardButton(text='Назад')
 
     menu.add(btn_toilet,btn_kitchen,btn_bathroom,btn_way,btn_dishes,btn_back)
-    sent = bot.send_message(message.chat.id, 'Чем ты помог?', reply_markup=menu)
+    sent = bot.send_message(message.chat.id, 'Что ты уже убрал?', reply_markup=menu)
+    # bot.delete_message(sent.chat.id, sent.id)
+
+
+def cleaning_committed(message):
+    global poll_info_status
+
+    if message.text == 'Кухня': points, half_point = 150 ,50
+    else: points, half_point = 100, 50
+
+    if not poll_info_status:
+
+        name = message.json['from']['first_name']
+        sender_id =  str(message.from_user.id)
+        bot.send_poll(int(family_chat_id), f'Убрал ли {name} комнату {message.text}?',
+                                  [ f'Да (+{points}б)', 'Нет(0б.)', f'50/50 (+{half_point}б.)' ], is_anonymous=False, type='regular',
+                                  disable_notification=True)
+        poll_info_status = True
+
+        global poll_info_name, poll_info_place, poll_info_points,poll_info_half_points
+        poll_info_name = sender_id
+        poll_info_place = message.text
+        poll_info_half_points = half_point
+
+
+    else:
+        bot.send_message(message.chat.id,'Одно голосование сейчас на проверке.Подождите, пожалуйста, а то я запутаюсь :)')
+
+
+
+def poll_status_checker():
+
+    global poll_info_status
+    global opt_yes, opt_no, opt_mid
+    global poll_info_name, poll_info_place, poll_info_points, poll_info_half_points
+
+    if int(opt_yes) >= poll_min_number :
+
+        bot.send_message(family_chat_id, 'Последнее голосование завершено, большинство согласно 😁')
+        poll_info_status = False
+        update_score(poll_info_name, poll_info_points, poll_info_place)
+
+        opt_yes, opt_no, opt_mid = 0, 0, 0
+
+
+
+    elif int(opt_no) >= poll_min_number - 1  :
+
+        bot.send_message(family_chat_id,'Последнее голосование завершено, большинство не согласно 🤓')
+        poll_info_status = False
+
+        opt_yes, opt_no, opt_mid = 0, 0, 0
+
+
+    elif int(opt_no) >= poll_min_number - 2 and opt_yes+opt_no+opt_mid >= poll_min_number:
+
+        bot.send_message(family_chat_id, 'Последнее голосование завершено, Не все согласны. Половоина баллов за уборку зачислено 🥴 ')
+        poll_info_status = False
+        update_score(poll_info_name, poll_info_half_points, poll_info_place)
+
+        opt_yes, opt_no, opt_mid = 0, 0, 0
+
+        #   false = pole is finished so you can start a new one. True - is in progress, wait for smth
+    else: pass
+
+
+#  understand what option a person vote for
+def process_new_poll_answer(poll):
+    global opt_yes, opt_no, opt_mid
+
+    answer = poll.option_ids[0]
+
+    if answer == 0 : opt_yes += 1
+    elif answer == 1 : opt_no += 1
+    elif answer == 2: opt_mid +=1
+
 
 def get_scores(message):
 
     # Подключаемся к БД
-    db = SQLighter('scores.db', message)
+    db = SQLighter('scores.db')
 
     res = db.get_all_scores()
     for j in range(len(res)): bot.send_message(message.chat.id, res[j])
 
     db.close()
 
-def send_poll(message):
-    global poll_info
-    poll_info = bot.send_poll(int(family_chat_id), 'Убрал ли Рамиль комнату Кухня?',
-                              [ 'Да (+15б)', 'Нет(-5б)', '50/50(8б)' ], is_anonymous= True, type='regular',
-                              disable_notification=True)
+def update_score(id,points,place):
+    db = SQLighter('scores.db')
 
-    time = str(poll_info.json[ 'date' ])
-    total_votes = str(poll_info.json[ 'poll' ][ 'total_voter_count' ])
-    opt_yes = str(poll_info.json[ 'poll' ][ 'options' ][ 0 ][ 'voter_count' ])
-    opt_no = str(poll_info.json[ 'poll' ][ 'options' ][ 1 ][ 'voter_count' ])
-    bot.send_message(message.chat.id, opt_yes)
+    db.up_score(id, points, place)
+
+    db.close()
+
 
 #  Присылаем утром погоду и пожелания.
 def good_morning():
     bot.send_message(family_chat_id,'Доброе утро! Cегодня очередной прекрасный день')
     send_weather(family_chat_id)
 #  Запускаем бесконечный цикл на другом ядре
+
+
 def morning_checker():
-    schedule.every().day.at("08:00").do(good_morning)
+    global poll_info_status
+    schedule.every().day.at("7:40").do(good_morning)
     while True:
-        schedule.run_pending()
-        time.sleep(5)
+        if poll_info_status: poll_status_checker()
+        time.sleep(1)
+
+
+def poll_handler(polls):
+    print(polls)
 
 
 @bot.message_handler(commands=['start'])
@@ -177,8 +263,24 @@ def hello(message):
 def main(message):
     message_filter(message)
 
+@bot.poll_answer_handler(process_new_poll_answer)
+def poll_answer_handler(_):
+    pass
+
 if __name__ == '__main__':
+    print(datetime.datetime.now().time())
+    global poll_info_status
+    global opt_yes, opt_no
+    opt_yes, opt_no, opt_mid= 0, 0, 0
+    poll_info_status = False
+
+
     thread1 = threading.Thread(target = morning_checker)
     thread1.start()
-    bot.infinity_polling()
 
+    while True:
+        try:
+            bot.polling(none_stop=True)
+        except:
+            print('Отключение')
+            time.sleep(7)
