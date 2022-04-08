@@ -21,7 +21,7 @@ class SQLighter:
     def up_score(self, chat_id, points, place):
 
 
-        current_date = str(datetime.now().date())[-5:-3]+'.'+str(datetime.now().date())[-2:]
+        current_date = str(datetime.now().date())[-2:]+'.'+str(datetime.now().date())[-5:-3]
 
         with self.connection:
             base = self.cursor.execute(f'SELECT chat_id, score FROM scores WHERE chat_id = {chat_id}').fetchall()

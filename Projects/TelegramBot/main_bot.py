@@ -242,7 +242,7 @@ def good_morning():
 
 def morning_checker():
     global poll_info_status
-    schedule.every().day.at("7:40").do(good_morning)
+    schedule.every().day.at("05:40").do(good_morning)
     while True:
         if poll_info_status: poll_status_checker()
         time.sleep(1)
@@ -268,19 +268,19 @@ def poll_answer_handler(_):
     pass
 
 if __name__ == '__main__':
-    print(datetime.datetime.now().time())
+
     global poll_info_status
     global opt_yes, opt_no
     opt_yes, opt_no, opt_mid= 0, 0, 0
     poll_info_status = False
 
 
-    thread1 = threading.Thread(target = morning_checker)
-    thread1.start()
-
     while True:
         try:
+            print('Включение', str(datetime.datetime.now().time())[:8])
+            thread1 = threading.Thread(target=morning_checker)
+            thread1.start()
             bot.polling(none_stop=True)
         except:
-            print('Отключение')
-            time.sleep(7)
+            print('Выключение', datetime.now().time()[ :8 ])
+            time.sleep(5)
