@@ -281,6 +281,6 @@ if __name__ == '__main__':
             thread1 = threading.Thread(target=morning_checker)
             thread1.start()
             bot.polling(none_stop=True)
-        except:
-            print('Выключение', datetime.now().time()[ :8 ])
-            time.sleep(5)
+        except Exception as exc:
+            print('Выключение', exc, str(datetime.datetime.now().time())[:8])
+            time.sleep(15)
