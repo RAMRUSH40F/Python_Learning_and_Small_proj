@@ -1,8 +1,6 @@
 import telebot
 from telebot import types
-import csv
 import pickle
-import re
 import schedule
 import time
 import threading
@@ -12,18 +10,22 @@ from SQLighter import SQLighter
 from config import token, sayhi, family_chat_id, admin_chat_id, poll_min_number
 from weather_api import get_weather
 
+# Initializing a bot
+bot = telebot.TeleBot(token)
+
 
 # This is a main tree of received message.
 
 def message_filter(message):
 
-    if message.text in ['меню', 'Меню', '@renatakamilabot', 'Старт', 'старт', 'Начать', 'начать', 'Привет', 'привет', 'Назад']:
+    if message.text in ['меню', 'Меню', '@renatakamilabot', 'Старт',
+                        'старт', 'Начать', 'начать', 'Привет', 'привет', 'Назад']:
         # bot.send_message(message.chat.id,message.chat.id)
         # bot.send_message(message.chat.id, message.json['from']['first_name'])
         main_menue(message)
 
     #  WEATHER SECTION
-    elif message.text in ['Погода',"погода"]: send_weather(message.chat.id)
+    elif message.text in ['Погода', "погода"]: send_weather(message.chat.id)
 
     #  FOODSTUFF LIST SECTION
     elif message.text in ['Список Продуктов', 'Посмотреть список продуктов', 'Добавить продукты','Очистить']:
@@ -33,7 +35,7 @@ def message_filter(message):
         elif message.text == 'Очистить': delete_shoplist(message.chat.id)
 
     # CLEANING IN A HOUSE POLL AND STATISTICS SECTION
-    elif message.text in ['Уборка',"уборка",'Заявить об уборке','Посмотреть баллы','Туалет','Кухня','Ванная','Коридор','Посуда']:
+    elif message.text in ['Уборка', "уборка", 'Заявить об уборке', 'Посмотреть баллы', 'Туалет', 'Кухня', 'Ванная', 'Коридор', 'Посуда']:
         if message.text in ['Уборка',"уборка"]: cleaning_menu(message)
         elif message.text == 'Заявить об уборке': cleaning_done_menu(message)
         elif message.text == 'Посмотреть баллы': get_scores(message)
@@ -43,7 +45,7 @@ def message_filter(message):
     elif censorship(message.text): bot.delete_message(message.chat.id, message.id)
 
 
-# This gives a user a main menu section buttons
+# This opens for a user a main menu section buttons
 def main_menue(message):
     if not message.chat.type == 'supergroup':
         menu = types.ReplyKeyboardMarkup(row_width=1, resize_keyboard=True)
@@ -119,7 +121,7 @@ def send_weather(chatid):
         bot.send_photo(chatid, weather_icon)
 
 def censorship(text):
-    return text in ['плохой','какашка','шындырск']
+    return text in ['плохой','какашка','шындырск','фу']
 
 # This gives a user a CLEANING menu section buttons
 def cleaning_menu(message):
@@ -200,11 +202,12 @@ def poll_status_checker():
     elif int(opt_no) >= poll_min_number - 2 and opt_yes+opt_no+opt_mid >= poll_min_number:
         # Last poll is finished
 
+        bot.send_message(family_chat_id, 'Последнее голосование завершено, Не все согласны. Половоина баллов за уборку зачислено 🥴 ')
+
         poll_info_status = False
         #  False = pole is finished so you can start a new one. True - is in progress, wait for smth
-        bot.send_message(family_chat_id, 'Последнее голосование завершено, Не все согласны. Половоина баллов за уборку зачислено 🥴 ')
-        update_score(poll_info_name, poll_info_half_points, poll_info_place)
 
+        update_score(poll_info_name, poll_info_half_points, poll_info_place)
         opt_yes, opt_no, opt_mid = 0, 0, 0
 
     else: pass
@@ -249,6 +252,8 @@ def morning_checker():
         if poll_info_status: poll_status_checker()
         time.sleep(1)
 
+'''Some handlers, they look for new actions and start a func belo it.'''
+
 # Delete your /start message and send a welcome message
 @bot.message_handler(commands=['start'])
 def hello(message):
@@ -272,9 +277,6 @@ if __name__ == '__main__':
     opt_yes, opt_no, opt_mid= 0, 0, 0
     poll_info_status = False
 
-    # Initializing a bot
-    bot = telebot.TeleBot(token)
-
     # An infinite loop: if bot loses a connection, it restarts.
     while True:
         try:
@@ -288,3 +290,4 @@ if __name__ == '__main__':
         except Exception as exc:
             print('Выключение', exc, str(datetime.datetime.now().time())[:8])
             time.sleep(15)
+
