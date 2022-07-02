@@ -1,3 +1,7 @@
+
+#  Создание опроса - объекта. Который будет иметь свои vote for vote - .
+#  методы
+
 def cleaning_committed(message):
     global poll_info_status
 
