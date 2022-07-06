@@ -31,11 +31,11 @@ class Student(SchoolMember):
 		SchoolMember.tell(self)
 		print('Оценки: "{0:d}"'.format(self.marks))
 
+if __name__ == '__main__':
+	t = Teacher('Mrs. Shrividya', 40, 30000) #добавляем данные
+	s = Student('Swaroop', 25, 75)
+	print() # печатает пустую строку
 
-t = Teacher('Mrs. Shrividya', 40, 30000) #добавляем данные
-s = Student('Swaroop', 25, 75)
-print() # печатает пустую строку
-
-members = [t, s]
-for member in members:
-	member.tell() # работает как для преподавателя, так и для студента
+	members = [t, s]
+	for member in members:
+		member.tell() # работает как для преподавателя, так и для студента

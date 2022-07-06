@@ -38,7 +38,8 @@ class Gate:
             time.sleep(self.pause)
             print('The gate has been opened')
 
-gate1 = Gate('opened',5 )
-gate1.close()
-gate1.open()
-gate1.open()
+if __name__ == '__main__':
+    gate1 = Gate('opened',5 )
+    gate1.close()
+    gate1.open()
+    gate1.open()
