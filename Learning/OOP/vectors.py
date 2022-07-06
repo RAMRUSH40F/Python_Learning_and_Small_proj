@@ -11,7 +11,7 @@ class Vector:
 		except IndexError :
 			print('Минимальная длина вектора - 3 ')
 
-
+ 
 	def __add__(self, other):
 		if self.dim() == other.dim():
 			if self.dim() <= 3 :
