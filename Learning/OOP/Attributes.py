@@ -39,4 +39,7 @@ if __name__ == '__main__':
 
     st.__delattr__('name')
     print(st.__dict__)
+    print(st.__enter__)
+
+
 

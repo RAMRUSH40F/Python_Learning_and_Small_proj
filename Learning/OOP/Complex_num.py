@@ -86,3 +86,4 @@ if __name__ == '__main__':
     c7 = Complex(1, 4)
     c8 = Complex(5, 3)
     print((c7*c8)())
+    print(c7.__dict__)

@@ -50,16 +50,25 @@ class Vector:
 	def give_info(self):
 		print('dimension:', self.dim(), 'projections:', self.projections)
 
+	def __eq__(self, other):
+		return self.x == other.x and self.y == other.y and self.z == other.z
 
+	def __hash__(self):
+		'''
+		Метод хеширует значения, прикрепляя
+		некое числр к id-шнику экземпляра.
+		Если мы переопределяем ==, то нужно задавать hash
+		'''
+		pass
 
-# TESTS
-v_1 = Vector(5, 6, 5)
-v_2 = Vector(1, 2, 3)
+if __name__ == '__main__':
+	# TESTS
+	v_1 = Vector(5, 6, 5)
+	v_2 = Vector(1, 2, 3)
 
+	v_3 = v_2*5
+	v_3.give_info()
 
-v_3 = v_2*5
-v_3.give_info()
-
-v_3 = v_2*v_1
-print(v_3)
+	v_3 = v_2*v_1
+	print(v_3)
 
