@@ -11,6 +11,7 @@ class User:
 class UserHandle:
     def __init__(self, name, age):
         self._user = User(name, age)
+
     def get_dataclass(self):
         return asdict(self._user)
 
