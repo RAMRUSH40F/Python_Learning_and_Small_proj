@@ -2,18 +2,69 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e3cac600-77ba-44e4-8949-cc80a000ec35" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/Learning/Stepik_course_1/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Learning/Stepik_course_1/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Learning/Stepik_course_1/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Learning/Stepik_course_1/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Projects/Famaly_chat_Telegram_bot/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Projects/Famaly_chat_Telegram_bot/.idea/Famaly_chat_Telegram_bot.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Projects/Famaly_chat_Telegram_bot/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Projects/Famaly_chat_Telegram_bot/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Projects/Famaly_chat_Telegram_bot/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Projects/Famaly_chat_Telegram_bot/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/Python.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Python.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Learning/Elementary/cycles/if-block.py" beforeDir="false" afterPath="$PROJECT_DIR$/Learning/Elementary/cycles/if-block.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Projects/Famaly_chat_Telegram_bot/Famaly_control_social_ratin.docx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Projects/Famaly_chat_Telegram_bot/SQLighter.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Projects/Famaly_chat_Telegram_bot/TelegramBot.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Projects/Famaly_chat_Telegram_bot/config.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Projects/Famaly_chat_Telegram_bot/handler.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Projects/Famaly_chat_Telegram_bot/icons/01d@2x.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Projects/Famaly_chat_Telegram_bot/icons/01n@2x.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Projects/Famaly_chat_Telegram_bot/icons/02d@2x.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Projects/Famaly_chat_Telegram_bot/icons/02n@2x.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Projects/Famaly_chat_Telegram_bot/icons/03d@2x.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Projects/Famaly_chat_Telegram_bot/icons/03n@2x.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Projects/Famaly_chat_Telegram_bot/icons/04d@2x.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Projects/Famaly_chat_Telegram_bot/icons/04n@2x.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Projects/Famaly_chat_Telegram_bot/icons/09d@2x.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Projects/Famaly_chat_Telegram_bot/icons/09n@2x.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Projects/Famaly_chat_Telegram_bot/icons/10d@2x.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Projects/Famaly_chat_Telegram_bot/icons/10n@2x.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Projects/Famaly_chat_Telegram_bot/icons/11d@2x.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Projects/Famaly_chat_Telegram_bot/icons/11n@2x.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Projects/Famaly_chat_Telegram_bot/icons/13d@2x.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Projects/Famaly_chat_Telegram_bot/icons/13n@2x.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Projects/Famaly_chat_Telegram_bot/icons/50d@2x.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Projects/Famaly_chat_Telegram_bot/icons/50n@2x.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Projects/Famaly_chat_Telegram_bot/main_bot.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Projects/Famaly_chat_Telegram_bot/modules_list.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Projects/Famaly_chat_Telegram_bot/not_used_code.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Projects/Famaly_chat_Telegram_bot/scores.db" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Projects/Famaly_chat_Telegram_bot/shoplistfile.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Projects/Famaly_chat_Telegram_bot/weather_api.py" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
   <component name="ProjectId" id="24hZe5nYzX9wdj3tvPxpYhjFeG9" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -21,7 +72,57 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/Learning/Stepik_course_1/venv" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/Learning/OOP" />
+  </component>
+  <component name="RunManager" selected="Python.RENATA">
+    <configuration name="RENATA" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="Python" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Learning/Elementary/cycles" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Learning/Elementary/cycles/RENATA.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="if-block" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="Python" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Learning/Elementary/cycles" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Learning/Elementary/cycles/if-block.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.RENATA" />
+        <item itemvalue="Python.if-block" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">

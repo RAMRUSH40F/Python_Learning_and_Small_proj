@@ -27,8 +27,8 @@ class Student(Human):
 
     def give_full_info(self):
 
-        print(f'{self.name} \n'\
-              f'Возраст {self.age} \n'\
+        print(f'{self.name} \n'
+              f'Возраст {self.age} \n'
               f'Средняя успеваемость{self.marks}')
 
 
@@ -39,7 +39,7 @@ if __name__ == '__main__':
 
     st.__delattr__('name')
     print(st.__dict__)
-    print(st.__enter__)
+
 
 
 

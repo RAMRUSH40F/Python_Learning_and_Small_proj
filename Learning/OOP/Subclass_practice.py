@@ -39,3 +39,4 @@ if __name__ == '__main__':
 	members = [t, s]
 	for member in members:
 		member.tell() # работает как для преподавателя, так и для студента
+
